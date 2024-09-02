@@ -1,10 +1,10 @@
 class ExecutarTransacaoFinanceira:
-    def __init__(self, repository):
-        self._repository = repository
+    def __init__(self, repositorio):
+        self._repositorio = repositorio
 
     def transferir(self, correlation_id, conta_origem, conta_destino, valor):
-        conta_saldo_origem = self._repository.get_registro_conta(conta_origem)
-        conta_saldo_destino = self._repository.get_registro_conta(conta_destino)
+        conta_saldo_origem = self._repositorio.get_registro_conta(conta_origem)
+        conta_saldo_destino = self._repositorio.get_registro_conta(conta_destino)
 
         if conta_saldo_origem is None:
             print(f"Transacao numero {correlation_id} foi cancelada: Conta de origem não existe")

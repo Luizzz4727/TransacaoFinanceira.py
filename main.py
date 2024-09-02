@@ -18,8 +18,8 @@ def main():
         Transacao(11, "09/09/2023 14:19:04", 675869708, 573659065, 20.09)
     ]
 
-    repository = AcessoDados()
-    executor = ExecutarTransacaoFinanceira(repository)
+    repositorio = AcessoDados()
+    executor = ExecutarTransacaoFinanceira(repositorio)
 
     for item in transacoes:
         executor.transferir(item.correlation_id, item.conta_origem, item.conta_destino, item.valor)

@@ -7,23 +7,23 @@ from classes.AcessoDados import AcessoDados
 class TransacaoFinanceiraTeste(unittest.TestCase):
 
     def test_transferir_valor_quando_saldo_suficiente(self):
-        repository = AcessoDados()
-        executor = ExecutarTransacaoFinanceira(repository)
+        repositorio = AcessoDados()
+        executor = ExecutarTransacaoFinanceira(repositorio)
         conta_origem = 938485762  # Conta com saldo de 180
         conta_destino = 2147483649  # Conta com saldo de 0
         valor_transferencia = 50
 
         executor.transferir(1, conta_origem, conta_destino, valor_transferencia)
 
-        saldo_origem = repository.get_registro_conta(conta_origem).get_saldo()
-        saldo_destino = repository.get_registro_conta(conta_destino).get_saldo()
+        saldo_origem = repositorio.get_registro_conta(conta_origem).get_saldo()
+        saldo_destino = repositorio.get_registro_conta(conta_destino).get_saldo()
 
         self.assertEqual(130, saldo_origem)
         self.assertEqual(50, saldo_destino)
 
     def test_cancelar_transferencia_quando_saldo_insuficiente(self):
-        repository = AcessoDados()
-        executor = ExecutarTransacaoFinanceira(repository)
+        repositorio = AcessoDados()
+        executor = ExecutarTransacaoFinanceira(repositorio)
         conta_origem = 210385733  # Conta com saldo de 10
         conta_destino = 238596054  # Conta com saldo de 478
         valor_transferencia = 20
@@ -40,15 +40,15 @@ class TransacaoFinanceiraTeste(unittest.TestCase):
 
         self.assertEqual(expected_message, result_message)
 
-        saldo_origem = repository.get_registro_conta(conta_origem).get_saldo()
-        saldo_destino = repository.get_registro_conta(conta_destino).get_saldo()
+        saldo_origem = repositorio.get_registro_conta(conta_origem).get_saldo()
+        saldo_destino = repositorio.get_registro_conta(conta_destino).get_saldo()
 
         self.assertEqual(10, saldo_origem)  # Saldo não deve mudar
         self.assertEqual(478, saldo_destino)  # Saldo não deve mudar
 
     def test_verificar_se_conta_origem_existe(self):
-        repository = AcessoDados()
-        executor = ExecutarTransacaoFinanceira(repository)
+        repositorio = AcessoDados()
+        executor = ExecutarTransacaoFinanceira(repositorio)
         conta_origem = 0  # Conta inexistente
         conta_destino = 238596054  # Conta com saldo de 478
         valor_transferencia = 20
@@ -65,13 +65,13 @@ class TransacaoFinanceiraTeste(unittest.TestCase):
 
         self.assertEqual(expected_message, result_message)
 
-        saldo_destino = repository.get_registro_conta(conta_destino).get_saldo()
+        saldo_destino = repositorio.get_registro_conta(conta_destino).get_saldo()
 
         self.assertEqual(478, saldo_destino)  # Saldo não deve mudar
 
     def test_verificar_se_conta_destino_existe(self):
-        repository = AcessoDados()
-        executor = ExecutarTransacaoFinanceira(repository)
+        repositorio = AcessoDados()
+        executor = ExecutarTransacaoFinanceira(repositorio)
         conta_origem = 210385733  # Conta com saldo de 10
         conta_destino = 0  # Conta inexistente
         valor_transferencia = 20
@@ -88,7 +88,7 @@ class TransacaoFinanceiraTeste(unittest.TestCase):
 
         self.assertEqual(expected_message, result_message)
 
-        saldo_origem = repository.get_registro_conta(conta_origem).get_saldo()
+        saldo_origem = repositorio.get_registro_conta(conta_origem).get_saldo()
 
         self.assertEqual(10, saldo_origem)  # Saldo não deve mudar
 
